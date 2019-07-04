@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.paper.mapper.OrderMapper">
+	<insert id="addNewOrder" parameterType="order">
+		insert into `t_order`(`userid`,`status`,`createtime`,`total`,`hide`) values(#{userid},0,#{createtime},#{total},false)
+	</insert>
+	<select id="queryAllOrder" resultType="order">
+		select * from `t_order`
+	</select>
+	<select id="queryOrderByUserId" parameterType="int" resultType="order">
+		select * from `t_order` where `userid` = #{arg0}
+		<!-- 
+		select * from `t_order` where userid = #{param1} limit #{param2}, 10
+		-->
+	</select>
+	<select id="queryOrderById" parameterType="int" resultType="order">
+		select * from `t_order` where id = #{id}
+	</select>
+	<update id="updateOrderStatus" parameterType="order">
+		update `t_order` set `status` = #{status} where id = #{id}
+	</update>
+	<select id="queryOrderByTimestamp" parameterType="date" resultType="order">
+		select * from `t_order` where `createtime` = #{timestamp}
+	</select>
+	<update id="updateAddress" parameterType="order">
+		update `t_order` set `address` = #{address} where id = #{id}
+	</update>
+	<update id="updateDealtime" parameterType="order">
+		update `t_order` set `dealtime` = #{dealtime} where id = #{id}
+	</update>
+</mapper>
